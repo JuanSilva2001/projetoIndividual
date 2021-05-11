@@ -72,7 +72,7 @@ body {
 }
 
 .banner{
-    background-image: url('./banner.jpg');
+    background-image: url('./Imagens/banner.jpg');
     width: 100%;
     height: 500px;
     background-size: cover;
