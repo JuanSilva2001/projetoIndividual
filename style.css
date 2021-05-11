@@ -1,0 +1,354 @@
+/*estilo header*/
+.header{
+    background-color:#0D0D0D;
+    width: 100%;
+    height: 120px;
+    border-bottom: #F2C063 3px solid;
+}
+
+/*estilo geral*/
+
+*{
+    margin:0;
+    padding: 0;
+    margin: auto;
+}
+
+.header a img{
+    float:left;
+    margin-left: 180px;
+    height: 100px;
+    margin-top: 10px;
+}
+
+.header li{
+    display: inline-block;
+    margin-top: 50px;
+    padding: 6px;
+    font-size: 17px;
+    border-radius: 10px;
+    background-color: #0D0D0D;
+    text-transform: uppercase;
+}
+
+.UL_Direita{
+    list-style: none;
+    float:right;
+    margin-right: 10%;
+}
+
+.header ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+.header ul li ul{
+	position:absolute;
+	display:none;
+    text-align: center;
+}
+
+.header ul li:hover ul, .header ul li.over ul{display:block;}
+
+.header ul li ul li {
+	display:block;
+    margin: 0;
+}
+
+.UL_Esquerda{
+    list-style: none;
+    float:left;
+    margin-left: 10%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.banner{
+    background-image: url('./banner.jpg');
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+}
+
+.texto{
+    width: 40%;
+    height: 200px;
+    padding-top: 250px;
+    margin-left: 120px;
+    text-align: center;
+}
+
+.texto h3{
+    color: white;
+    font-size: 15px;
+    font-weight: lighter;
+    padding-top: 20px;
+}
+
+.texto h2{
+    color: white;
+    font-size: 25px;
+}
+
+.rodape{
+    background-color:#0D0D0D ;
+    color:white;
+    border-top: #F2C063 3px solid;
+    text-align: center;
+    height: 100px;
+}
+
+.rodape p{
+    padding-top: 40px;
+    font-size: 20px;
+}
+
+.header .Escolhido{
+    color: #F2C063;
+}
+
+.Confronto{
+    width: 80%;
+    height: 50px;
+    margin-top: 50px;
+    border: #F2C063 solid 2px;
+    background-color:  #0D0D0D;
+    color: white;
+}
+
+.Confronto .Casa{
+    text-align: center;
+}
+
+
+.Confronto .Casa img {
+    height: 40px;
+}
+
+.Confronto .Casa .Placar {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.Confronto .Casa .Time {
+    font-size: 25px;
+}
+
+.Confronto .Casa .X {
+    font-size: 15px;
+}
+
+.Rodada button{
+    border: none;
+    background-color: transparent;
+}
+
+.Rodada button img{
+    height: 40px;
+    margin-top: 10px;
+}
+
+.Rodada p{
+    color:white;
+    font-size: 20px;
+    font-weight: bolder;
+    margin: 0;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.Rodada{
+    background-color: #0D0D0D;
+    width: 100%;
+    height: 60px;
+    border-bottom: #F2C063 solid 3px;
+}
+
+.Rodada .Meio{
+    width: 50%;
+    text-align: center;
+}
+
+.Login{
+    background-color: #0D0D0D;
+    color: #F2C063;
+    width: 40%;
+    height: 400px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.Login input{
+    margin-top: 50px;
+    border:none;
+    border-bottom: #F2C063 2px solid;
+    background-color: transparent;
+    height: 30px;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+}
+
+.Login input:focus{
+    outline: none;
+    height: 30px;
+    border: #F2C063 2px solid;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.Login input::placeholder{
+    color: white;
+    text-align: center;
+}
+
+.Login button{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color: #F2C063;
+    color: #0D0D0D;
+    border: none;
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.Login a{
+    text-decoration: none;
+    color: #F2C063;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.Login h1{
+    padding-top: 20px;
+}
+
+.Cadastro{
+    background-color: #0D0D0D;
+    color: #F2C063;
+    width: 40%;
+    height: 450px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.Cadastro input{
+    margin-top: 30px;
+    border:none;
+    border-bottom: #F2C063 2px solid;
+    background-color: transparent;
+    height: 30px;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+}
+
+.Cadastro input:focus{
+    outline: none;
+    height: 30px;
+    border: #F2C063 2px solid;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.Cadastro input::placeholder{
+    color: white;
+    text-align: center;
+}
+
+.Cadastro button{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    background-color: #F2C063;
+    color: #0D0D0D;
+    border: none;
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.Cadastro a{
+    text-decoration: none;
+    color: #F2C063;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.Cadastro h1{
+    padding-top: 20px;
+}
+
+.Grupo {
+    height: 150px;
+    margin-top: 50px;
+    border: #F2C063 solid 2px;
+    background-color:  #0D0D0D;
+    color: white;
+    border-collapse: collapse;
+}
+
+.Grupo tr{
+    border-bottom: #F2C063 solid 2px;
+    width: 30px;
+}
+.Grupo tr #classificacao{
+    width: 200px;
+    height: 34px;
+}
+
+.Grupo tr th{
+    width: 40px;
+}
+
+.Grupo tr td{
+    text-align: center;
+}
+
+.Grupo tr td img {
+    height: 40px;
+}
+
+.Grupo tr td .Placar {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.Grupo tr td .Time {
+    font-size: 25px;
+}
+
+.Grupo tr td .X {
+    font-size: 15px;
+}
+
+.Grupo #rodadaGrupo{
+    width: 400px;
+    height: 25px;
+}
+
+.Grupo #rodadaGrupo h1{
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+}
+
+.Grupo #rodadaGrupo button{
+    border: none;
+    background-color: transparent;
+}
+
+.Grupo #jogoGrupo{
+    height: 56px;
+}
+
+.Grupo #rodadaGrupo p{
+    color:white;
+    display: inline-block;
+}
