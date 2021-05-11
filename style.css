@@ -13,7 +13,7 @@
     padding: 0;
     margin: auto;
 }
-
+/*inicio estilo menu*/
 .header a img{
     float:left;
     margin-left: 180px;
@@ -61,6 +61,12 @@
     margin-left: 10%;
 }
 
+.header .Escolhido{
+    color: #F2C063;
+}
+/*fim estilo menu*/
+
+/*estilo da pagina index*/
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -92,23 +98,6 @@ body {
     font-size: 25px;
 }
 
-.rodape{
-    background-color:#0D0D0D ;
-    color:white;
-    border-top: #F2C063 3px solid;
-    text-align: center;
-    height: 100px;
-}
-
-.rodape p{
-    padding-top: 40px;
-    font-size: 20px;
-}
-
-.header .Escolhido{
-    color: #F2C063;
-}
-
 .Confronto{
     width: 80%;
     height: 50px;
@@ -121,7 +110,6 @@ body {
 .Confronto .Casa{
     text-align: center;
 }
-
 
 .Confronto .Casa img {
     height: 40px;
@@ -169,6 +157,74 @@ body {
 .Rodada .Meio{
     width: 50%;
     text-align: center;
+}
+
+.Grupo {
+    height: 150px;
+    margin-top: 50px;
+    border: #F2C063 solid 2px;
+    background-color:  #0D0D0D;
+    color: white;
+    border-collapse: collapse;
+}
+
+.Grupo tr{
+    border-bottom: #F2C063 solid 2px;
+    width: 30px;
+}
+.Grupo tr #classificacao{
+    width: 200px;
+    height: 34px;
+}
+
+.Grupo tr th{
+    width: 40px;
+}
+
+.Grupo tr td{
+    text-align: center;
+}
+
+.Grupo tr td img {
+    height: 40px;
+}
+
+.Grupo tr td .Placar {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.Grupo tr td .Time {
+    font-size: 25px;
+}
+
+.Grupo tr td .X {
+    font-size: 15px;
+}
+
+.Grupo #rodadaGrupo{
+    width: 400px;
+    height: 25px;
+}
+
+.Grupo #rodadaGrupo h1{
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+}
+
+.Grupo #rodadaGrupo button{
+    border: none;
+    background-color: transparent;
+}
+
+.Grupo #jogoGrupo{
+    height: 56px;
+}
+
+.Grupo #rodadaGrupo p{
+    color:white;
+    display: inline-block;
 }
 
 .Login{
@@ -285,70 +341,97 @@ body {
     padding-top: 20px;
 }
 
-.Grupo {
-    height: 150px;
-    margin-top: 50px;
-    border: #F2C063 solid 2px;
-    background-color:  #0D0D0D;
-    color: white;
-    border-collapse: collapse;
+.Fundacao {
+    float: left;
+    width: 100%;
+    height: 600px;
+    text-align: justify;
 }
 
-.Grupo tr{
-    border-bottom: #F2C063 solid 2px;
-    width: 30px;
-}
-.Grupo tr #classificacao{
-    width: 200px;
-    height: 34px;
-}
-
-.Grupo tr th{
-    width: 40px;
+.Fundacao p{
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 80%;
+    float: left;
+    font-size: 18px;
 }
 
-.Grupo tr td{
-    text-align: center;
+.Fundacao h2{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    width: 90%;
+    margin-left: 30px;
+    float: left;
+    color: #F2C063;
+    text-justify: inter-word;
 }
 
-.Grupo tr td img {
-    height: 40px;
+.Fundacao .Antecedentes{
+    border-bottom: #F2C063 4px solid;
+    height: 35%;
 }
 
-.Grupo tr td .Placar {
-    font-size: 20px;
-    font-weight: bolder;
+.Fundacao .Antecedentes img {
+    width: 5%;
+    margin-left: 5%;
 }
 
-.Grupo tr td .Time {
-    font-size: 25px;
+.Fundacao .Criacao{
+    border-bottom: #F2C063 4px solid;
+    height: 42%;
 }
 
-.Grupo tr td .X {
-    font-size: 15px;
+.Fundacao .Criacao img {
+    width: 15%;
 }
 
-.Grupo #rodadaGrupo{
-    width: 400px;
-    height: 25px;
+.Fundacao .Nomes{
+    border-bottom: #F2C063 4px solid;
+    height: 25%;
 }
 
-.Grupo #rodadaGrupo h1{
-    margin-left: 10px;
-    margin-right: 10px;
-    color: white;
+.Fundacao .Nomes img {
+    width: 12%;
+    margin-left: 2%;
 }
 
-.Grupo #rodadaGrupo button{
-    border: none;
-    background-color: transparent;
+.Fundacao .Brasil{
+    border-bottom: #F2C063 4px solid;
+    height: 38%;
 }
 
-.Grupo #jogoGrupo{
-    height: 56px;
+.Fundacao .Brasil img {
+    width: 15%;
 }
 
-.Grupo #rodadaGrupo p{
-    color:white;
-    display: inline-block;
+.Fundacao .Briga{
+    border-bottom: #F2C063 4px solid;
+    height: 36%;
+}
+
+.Fundacao .Briga img {
+    margin-top: 0px;
+    width: 15%;
+    margin-bottom: 20px;
+}
+
+.Fundacao .Argentina{
+    border-bottom: #F2C063 4px solid;
+    height: 27%;
+}
+
+.Fundacao .Argentina img {
+    margin-top: 0px;
+    width: 15%;
+    margin-bottom: 20px;
+}
+
+.Fundacao .Dinheiro{
+    border-bottom: #F2C063 4px solid;
+    height: 30%;
+}
+
+.Fundacao .Dinheiro img {
+    width: 8%;
+    margin-left: 3%;
 }
