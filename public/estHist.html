@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Individual </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="verificar()">
+    <div class="header">
+        <ul class="UL_Esquerda">
+            <li><a href="Temp.html">Temporada</a></li>
+            <li><a href="Hist.html">Historia</a></li>
+        </ul>
+        <a href="index.html"><img src='./Imagens/marca.png'></a>
+        <ul class="UL_Direita">
+            <li><a class='Escolhido'>Estatistica</a>
+                <ul>
+                    <li><a href="Estatistica.html">Atual</a></li>
+                    <li><a class='Escolhido' href="estHist.html">Historia</a></li>
+                </ul>
+            </li>
+            <li><a id='idLogin'></a></li>
+        </ul>
+    </div>
+    
+</body>
+
+</html>
+
+<script type="text/javascript" src="funcoes.js"></script>
+<script>
+    function verificar(){
+        var usuario = verificar_autenticacao();
+        var Site = '';
+        if(usuario == 'login'){
+            Site = 'Login.html';
+        }
+        else{
+            Site = 'Logout.html';
+        }
+        console.log(usuario + Site)
+        idLogin.innerHTML=usuario;
+        idLogin.href=Site;  
+    }
+    
+</script>

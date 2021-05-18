@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Individual </title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./Scripts/Validacao.js"></script>
+    <script src="./Scripts/Converter.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <ul class="UL_Esquerda">
+            <li><a href="Temp.html">Temporada</a></li>
+            <li><a href="Hist.html">Historia</a></li>
+        </ul>
+        <a href="index.html"><img src='./Imagens/marca.png'></a>
+        <ul class="UL_Direita">
+            <li><a>Estatistica</a>
+                <ul>
+                    <li><a href="Estatistica.html">Atual</a></li>
+                    <li><a href="estHist.html">Historia</a></li>
+                </ul>
+            </li>
+            <li><a class='Escolhido' href="Login.html">Login</a></li>
+        </ul>
+    </div>
+    <div class="Cadastro">
+        <h1>Cadastro</h1>
+        <form id="form_cadastro" method="POST" onsubmit="return cadastrar()">
+        <input type="text" name="apelido" placeholder="Insira o apelido" id='idApelido'><br>
+        <input type="text" name="email" placeholder="Insira o seu email" id='idEmail'><br>
+        <input type="Password" name="senha" placeholder="Insira a sua senha" id='idSenha'><br>
+        <input type="Password" placeholder="Confirme a sua senha" id='idConfiSenha'><br>
+        <input type="submit" id="btn_entrar" value="Cadastrar" class='button'><br>
+        </form>
+        <a href='Login.html'>Já tem login?</a>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+function cadastrar() {
+    if(
+            verificaApelido(idApelido.value) &&
+            verificaEmail(idEmail.value) &&
+            verificaSenha(idSenha.value) &&
+            confirmaSenha(idConfiSenha.value, idSenha.value)
+        ){
+           // senha.value=converter(idSenha.value);
+        var formulario = new URLSearchParams(new FormData(form_cadastro));
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            body: formulario
+        }).then(function (response) {
+            
+            if (response.ok) {
+
+                window.location.href='Login.html';
+
+            } else {
+
+                console.log('Erro de cadastro!');
+                response.text().then(function (resposta) {
+                    alert(resposta);
+                });
+            }
+        });
+
+        return false;
+    }
+    else{
+        return false;
+    }
+}
+
+</script>
