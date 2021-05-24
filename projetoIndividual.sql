@@ -8,8 +8,6 @@ create table Usuario(
     senhaUsu varchar(150)
 );
 
-select * from Times;
-
 create table Rodada(
 	idRodada int primary key auto_increment,
 	faseRodada varchar(45),

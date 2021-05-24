@@ -79,3 +79,9 @@ insert into Times values
 (null,'Deportivo Lara','LAR','LAR.png',2,3,'4,03 Mi. €',10),
 (null,'Deportivo La Guaira','LAG','LAG.png',1,2,'5,10 Mi. €',10),
 (null,'Deportivo Táchira','DTA','DTA.png',5,9,'4,78 Mi. €',10);
+
+insert into dadosJogos values
+(null,'Alfredo Vieira','2021-02-23','21:30',1);
+
+insert into Jogos values
+(2,31,1,'F');
