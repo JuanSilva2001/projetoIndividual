@@ -4,7 +4,7 @@ var sequelize = require('../models').sequelize;
 var Leitura = require('../models').Leitura;
 var env = process.env.NODE_ENV || 'development';
 
-/* Recuperar as últimas N leituras */
+/* Recuperar as últimas N leituras 
 router.get('/ultimas/:idcaminhao', function(req, res, next) {
 	
 	// quantas são as últimas leituras que quer? 7 está bom?
@@ -106,7 +106,21 @@ router.get('/estatisticas', function (req, res, next) {
 			res.status(500).send(erro.message);
 		});
   
+});*/
+router.get('/carregarTimes', function(req, res, next){
+	console.log('Pegando Jogos');
+	let instrucaoSql = "";
+	instrucaoSql = `select * from Times`;
+	
+	console.log(instrucaoSql);
+	
+	sequelize.query(instrucaoSql, { type: sequelize.QueryTypes.SELECT })
+	.then(resultado => {
+		res.json(resultado[0]);
+	}).catch(erro => {
+		console.error(erro);
+		res.status(500).send(erro.message);
+	});
 });
-
 
 module.exports = router;
