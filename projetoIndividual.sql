@@ -84,8 +84,8 @@ create table Grupos(
 create table Jogos(
     fkDados int,
     fkTimes int,
-    golsFeitos int ,
-    casaFora char(1),
+    golsFeitosJogo int ,
+    casaFora char(1) check (casaFora='C' or casaFora='F'),
     foreign key (fkDados) references dadosJogos(idJogos),
     foreign key (fkTimes) references Times(idTime)
 );
