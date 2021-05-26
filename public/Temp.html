@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body onload="Fase(3);verificar()">
+<body onload="Fase(3);verificar();">
     <div class="header">
         <ul class="UL_Esquerda">
             <li><a class='Escolhido' href="Temp.html">Temporada</a></li>
@@ -44,6 +44,99 @@
 <script>
     var Fases = ['Rodada 1', 'Rodada 2', 'Rodada 3', 'Fase de Grupos', 'Oitavas', 'Quartas', 'Semi', 'Final'];
     var qualRodada = 3;
+    function Teste(){
+        fetch(`/jogos/Partida/${qualRodada}`, {cache:'no-store'}).then(resposta => {
+        if (resposta.ok) {
+            resposta.json().then(json => {
+                switch (qualRodada){
+                    case 0:
+                    for(var contador=0; contador<6; contador+=2){
+                        var dadosPrimeiroJogo=converterDia(json[contador].dia)+' '+json[contador].estadioJogo+ ' '+ json[contador].horas;
+                        var dadosSegundoJogo=converterDia(json[json.length-(6-contador)].dia)+' '+json[json.length-(6-contador)].estadioJogo+ ' '+ json[json.length-(6-contador)].horas;
+                        var placarIda= (json[contador].golsFeitosJogo).toString() + (json[contador+1].golsFeitosJogo).toString();
+                        var placarVolta= (json[json.length-(6-contador)].golsFeitosJogo).toString() + (json[json.length-(5-contador)].golsFeitosJogo).toString();
+                        console.log(placarVolta);
+                        Jogos.innerHTML+=matamata(
+                            json[contador].Abreviacao,
+                            json[contador+1].Abreviacao,
+                            dadosPrimeiroJogo,
+                            dadosSegundoJogo,
+                            placarIda,
+                            placarVolta
+                            );
+                    }
+                    break;
+                    case 1:
+                    for(var contador=0; contador<16; contador+=2){
+                        var dadosPrimeiroJogo=converterDia(json[contador].dia)+' '+json[contador].estadioJogo+ ' '+ json[contador].horas;
+                        var dadosSegundoJogo=converterDia(json[json.length-(16-contador)].dia)+' '+json[json.length-(16-contador)].estadioJogo+ ' '+ json[json.length-(16-contador)].horas;
+                        var placarIda= (json[contador].golsFeitosJogo).toString() + (json[contador+1].golsFeitosJogo).toString();
+                        var placarVolta= (json[json.length-(16-contador)].golsFeitosJogo).toString() + (json[json.length-(15-contador)].golsFeitosJogo).toString();
+                        console.log(placarVolta);
+                        Jogos.innerHTML+=matamata(
+                            json[contador].Abreviacao,
+                            json[contador+1].Abreviacao,
+                            dadosPrimeiroJogo,
+                            dadosSegundoJogo,
+                            placarIda,
+                            placarVolta
+                            );
+                            console.log(contador);
+                    }
+                    break;
+                    case 2:
+                    for(var contador=0; contador<8; contador+=2){
+                        var dadosPrimeiroJogo=converterDia(json[contador].dia)+' '+json[contador].estadioJogo+ ' '+ json[contador].horas;
+                        var dadosSegundoJogo=converterDia(json[json.length-(8-contador)].dia)+' '+json[json.length-(8-contador)].estadioJogo+ ' '+ json[json.length-(8-contador)].horas;
+                        var placarIda= (json[contador].golsFeitosJogo).toString() + (json[contador+1].golsFeitosJogo).toString();
+                        var placarVolta= (json[json.length-(8-contador)].golsFeitosJogo).toString() + (json[json.length-(7-contador)].golsFeitosJogo).toString();
+                        console.log(placarVolta);
+                        Jogos.innerHTML+=matamata(
+                            json[contador].Abreviacao,
+                            json[contador+1].Abreviacao,
+                            dadosPrimeiroJogo,
+                            dadosSegundoJogo,
+                            placarIda,
+                            placarVolta
+                            );
+                            console.log(contador);
+                    }
+                    break;
+                    case 3:
+                        var vetorTimesGrupos= [];
+                        var vetorDadosGrupos= [];
+                        
+                        var vetorGrupos=['A','B','C','D','E','F','G','H'];
+                        for(var contador=0; contador<8;contador++){
+                            var vetorTimesPorGrupo=[];
+                            var vetorDadosPorGrupo=[];
+                            for(var contadorTimes=(4*contador);contadorTimes<(4*(1+contador));contadorTimes++){
+                                vetorTimesPorGrupo.push(json[contadorTimes].nomeTime);
+                                var vetorDadosTime=[];
+                                vetorDadosTime.push((json[contadorTimes].P).toString());
+                                vetorDadosTime.push((json[contadorTimes].J).toString());
+                                vetorDadosTime.push((json[contadorTimes].V).toString());
+                                vetorDadosTime.push((json[contadorTimes].E).toString());
+                                vetorDadosTime.push((json[contadorTimes].D).toString());
+                                vetorDadosTime.push((json[contadorTimes].GP).toString());
+                                vetorDadosTime.push((json[contadorTimes].GC).toString());
+                                vetorDadosTime.push((json[contadorTimes].SG).toString());
+                                vetorDadosTime.push((json[contadorTimes].Aproveitamento).toString());
+                                vetorDadosPorGrupo.push(vetorDadosTime);
+                            }
+                            console.log(vetorDadosPorGrupo);
+                            Jogos.innerHTML+=Grupo(vetorGrupos[contador], vetorTimesPorGrupo, vetorDadosPorGrupo);
+                        }
+                        
+                    break;
+                }
+            });
+        } else {
+            console.error(resposta);
+            console.log('Abc');
+        } 
+    }); 
+}
     function proximaRodada() {
         if (qualRodada < 7 && qualRodada >= 0) {
             qualRodada++;
@@ -58,75 +151,11 @@
             Fase(qualRodada);
         }
     }
+    
     function Fase(numero) {
-        if (numero == 3) {
-            Jogos.innerHTML = `
-            <table>
-        <tr>
-            <td>
-        <table class="Grupo">
-            <tr>
-                <th colspan="2" id="classificacao">Classificação</th>
-                <th>P</th>
-                <th>J</th>
-                <th>V</th>
-                <th>E</th>
-                <th>D</th>
-                <th>GP</th>
-                <th>GC</th>
-                <th>SG</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Sao Paulo</td>
-                <td>3</td>
-                <td>1</td>
-                <td>1</td>
-                <td>0</td>
-                <td>0</td>
-                <td>3</td>
-                <td>0</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Sao Paulo</td>
-                <td>3</td>
-                <td>1</td>
-                <td>1</td>
-                <td>0</td>
-                <td>0</td>
-                <td>3</td>
-                <td>0</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Sao Paulo</td>
-                <td>3</td>
-                <td>1</td>
-                <td>1</td>
-                <td>0</td>
-                <td>0</td>
-                <td>3</td>
-                <td>0</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Sao Paulo</td>
-                <td>3</td>
-                <td>1</td>
-                <td>1</td>
-                <td>0</td>
-                <td>0</td>
-                <td>3</td>
-                <td>0</td>
-                <td>3</td>
-            </tr>
-        </table>
-    </td>
-    <td>
+        /*if (numero == 3) {
+            for(var contador=0; contador<8; contador++){
+            Jogos.innerHTML = 
         <table class='Grupo'>
             <tr>
                 <th colspan="7">
@@ -188,8 +217,8 @@
             </tr>
         </table>
             `;
-        }
-        else if(numero==7){
+        }*/
+        /*else if(numero==7){
             Jogos.innerHTML = `<table class="Confronto">
             <tr>
                 <th colspan="7">SAB-20/11 Centenario(URU)</th>
@@ -221,84 +250,77 @@
     </tr>
     </table>`;
         }
-        else{
+        else{*/
             switch (qualRodada){
                 case 0:
                     Jogos.innerHTML="";
-                    var arrayTimeCasa=['LIV','UCV','ROY'];
-                    var arrayTimeFora=['UNQ','CAR','GUA'];
-                    for(var contador=0; contador<3; contador++){
-                        Jogos.innerHTML += matamata(arrayTimeCasa[contador], arrayTimeFora[contador]);
-                    }
+                    Teste();
                 break;
                 case 1:
                     Jogos.innerHTML="";
-                    var arrayTimeCasa=['UNQ','GUA','UES','UCH','GRE','MON','CAR','SAN'];
-                    var arrayTimeFora=['LIB','ANA','IND','SLO','IGD','BOL','JUN','LAR'];
-                    for(var contador=0; contador<8; contador++){
-                        Jogos.innerHTML += matamata(arrayTimeCasa[contador], arrayTimeFora[contador]);
-                    }
+                    Teste();
                 break;
                 case 2:
                     Jogos.innerHTML="";
-                    var arrayTimeCasa=['LIB','IND','BOL','SLO'];
-                    var arrayTimeFora=['ANA','GRE','JUN','SAN'];
-                    for(var contador=0; contador<4; contador++){
-                        Jogos.innerHTML += matamata(arrayTimeCasa[contador], arrayTimeFora[contador]);
-                    }
+                    Teste();
+                break;
+                case 3:
+                    Jogos.innerHTML="";
+                    Teste();
                 break;
             }
         }
-    }
+    //}
 
-    function matamata(timeCasa, timeFora){
-        var tabela = `<table class="Confronto">
+    function matamata(timeCasa, timeFora, dadosJogo1, dadosJogo2, placaJogo1, placaJogo2){
+        var tabela = 
+        `<table class="Confronto">
             <tr>
-                <th colspan="7" style='border-right: #F2C063 3px solid;'>TER-27/04 Morumbi</th>
-                <th colspan="7">QUA-05/05 Morumbi</th>
+                <th colspan="7" style='border-right: #F2C063 3px solid;'>${dadosJogo1}</th>
+                <th colspan="7">${dadosJogo2}</th>
             </tr>
         <tr class="Casa">
             <td>
-                <img src='./Logo.png'>
+                <img src='./Imagens/Times/${timeCasa}.png'>
             </td>
             <td>
                 <span class="Time">${timeCasa}</span>
             </td>
             <td>
-                <span class="Placar">0</span>
+                <span class="Placar">${placaJogo1[0]}</span>
             </td>
             <td>
                 <span class="X">X</span>
             </td>
             <td>
-                <span class="Placar">0</span>
+                <span class="Placar">${placaJogo1[1]}</span>
             </td>
             <td>
                 <span class="Time">${timeFora}</span>
             </td>
             <td style='border-right: #F2C063 3px solid;'>
-                <img src='./Logo.png'>
+                <img src='./Imagens/Times/${timeFora}.png'>
             </td>
             <td>
-                <img src='./Logo.png'>
+                <img src='./Imagens/Times/${timeFora}.png'>
             </td>
             <td>
                 <span class="Time">${timeFora}</span>
             </td>
             <td>
-                <span class="Placar">0</span>
+                <span class="Placar">${placaJogo2[0]}</span>
             </td>
             <td>
                 <span class="X">X</span>
             </td>
             <td>
-                <span class="Placar">0</span>
+                <span class="Placar">${placaJogo2[1]}</span>
             </td>
             <td>
                 <span class="Time">${timeCasa}</span>
             </td>
             <td>
-                <img src='./Logo.png'>
+                <img src='./Imagens/Times/${timeCasa}.png'>
             </td>
         </tr>
         </table>
@@ -323,5 +345,54 @@
         idLogin.innerHTML=usuario;
         idLogin.href=Site;  
     }
-    
+    function converterDia(Dia){
+        Dia = new Date(Dia);
+        var semana=['DOM','SEG','TER','QUA','QUI','SEX','SAB']
+        var diaJogo='';
+        diaJogo= semana[Dia.getDay()+1];
+        diaJogo+=" "+ (Dia.getDate()+1);
+        diaJogo+="/"+ (Dia.getMonth()+1);
+        return diaJogo;
+    }
+
+    function Grupo(Grupo,ArrayTimeGrupo,dadosGrupo){
+        var tabela= `
+            <h1>Grupo ${Grupo}</h1>
+            <table class="Grupo">
+                <tr>
+                    <th colspan="2" id="classificacao">Classificação</th>
+                    <th>P</th>
+                    <th>J</th>
+                    <th>V</th>
+                    <th>E</th>
+                    <th>D</th>
+                    <th>GP</th>
+                    <th>GC</th>
+                    <th>SG</th>
+                    <th>%</th>
+                </tr>
+            `;
+        for(var contador=0; contador<4; contador++){
+            var cor='white';
+            if(contador<=1){cor='green';}
+            else if(contador==2){cor='blue';}
+            tabela +=`
+            <tr>
+                <td style='color:${cor}'>${contador+1}</td>
+                <td>${ArrayTimeGrupo[contador]}</td>
+                <td>${dadosGrupo[contador][0]}</td>
+                <td>${dadosGrupo[contador][1]}</td>
+                <td>${dadosGrupo[contador][2]}</td>
+                <td>${dadosGrupo[contador][3]}</td>
+                <td>${dadosGrupo[contador][4]}</td>
+                <td>${dadosGrupo[contador][5]}</td>
+                <td>${dadosGrupo[contador][6]}</td>
+                <td>${dadosGrupo[contador][7]}</td>
+                <td>${dadosGrupo[contador][8]}%</td>
+            </tr>
+            `;
+        }
+        tabela+=`</table>`;
+        return tabela;
+    }
 </script>
