@@ -103,8 +103,8 @@ body {
     height: 50px;
     margin-top: 50px;
     border: #F2C063 solid 2px;
-    background-color:  #F0F0F0;
-    color:#0d0d0d;
+    background-color:  #0d0d0d;
+    color: #f0f0f0;;
 }
 
 .Confronto .Casa td{
@@ -147,7 +147,7 @@ body {
 }
 
 .Rodada p{
-    color:white;
+    color:#f0f0f0;
     font-size: 20px;
     font-weight: bolder;
     margin: 0;
@@ -168,29 +168,26 @@ body {
 }
 
 .Grupo {
-    height: 150px;
+    height: 200px;
     margin-top: 50px;
     border: #F2C063 solid 2px;
     background-color:  #0D0D0D;
     color: white;
     border-collapse: collapse;
+    text-align: center;
 }
 
-.Grupo tr{
+.Grupo .Tabela{
     border-bottom: #F2C063 solid 2px;
-    width: 30px;
 }
+
 .Grupo tr #classificacao{
     width: 200px;
-    height: 34px;
 }
+
 
 .Grupo tr th{
     width: 40px;
-}
-
-.Grupo tr td{
-    text-align: center;
 }
 
 .Grupo tr td img {
@@ -212,7 +209,6 @@ body {
 
 .Grupo #rodadaGrupo{
     width: 400px;
-    height: 25px;
 }
 
 .Grupo #rodadaGrupo h1{
@@ -442,4 +438,10 @@ body {
 .Fundacao .Dinheiro img {
     width: 8%;
     margin-left: 3%;
+}
+
+.artilheirosHistoricos {
+    width: 400px;
+    height: 100px;
+    float: left;
 }

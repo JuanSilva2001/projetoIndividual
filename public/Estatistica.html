@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body onload='verificar()'>
+<body onload='verificar();rakingTimeGols();rakingTimeGolsLevados()'>
     <div class="header">
         <ul class="UL_Esquerda">
             <li><a href="Temp.html">Temporada</a></li>
@@ -26,7 +26,117 @@
             <li><a id='idLogin'></a></li>
         </ul>
     </div>
-    
+    <div class='artilheirosAssistencias'>
+        <div id='Artilheiros'>
+            <table>
+                <tr>
+                    <th colspan="2">Nome Jogador</th>
+                    <th>Time</th>
+                    <th>Gols Feitos</th>
+                </tr>
+                <tr>
+                    <td>1º</td>
+                    <td>Gabriel Barbosa</td>
+                    <td>Flamengo</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Miguel Angel Borja</td>
+                    <td>Junior Barranquilla</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Hulk</td>
+                    <td>Atlético Mineiro</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Rony</td>
+                    <td>Palmeiras</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>2º</td>
+                    <td>Jarlan Barrera</td>
+                    <td>Atletico Nacional</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Tomás Chancelay</td>
+                    <td>Racing</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Christian Ortiz</td>
+                    <td>Indepediente Del Valle</td>
+                    <td>5</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id='Assistencias'>
+            <table>
+                <tr>
+                    <th colspan="2">Nome Jogador</th>
+                    <th>Time</th>
+                    <th>Passes Feitos</th>
+                </tr>
+                <tr>
+                    <td>1º</td>
+                    <td>Maurice Cova</td>
+                    <td>Deportivo Tachira</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Maximilliano Lovera</td>
+                    <td>Racing</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>2º</td>
+                    <td>Rolando Blackburn</td>
+                    <td>The Strongest</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Jhon Pajoy</td>
+                    <td>Junior Barranquilla</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Jorge Recalde</td>
+                    <td>Olimpia</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Felipe Jonatan</td>
+                    <td>Santos</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Jefferson Savarino</td>
+                    <td>Atlético Mineiro</td>
+                    <td>3</td>
+                </tr>
+            </table>
+        </div>
+        <div id='timeGols'>
+            
+        </div>
+        <div id='timeGolsLevados'>
+            
+        </div>
+    </div>
 </body>
 
 </html>
@@ -46,4 +156,106 @@
         idLogin.href=Site;  
     }
     
+    /*function obterDadosGraficoPrimeiraVez() {
+        console.log("executei obterDadosGraficoPrimeiraVez")
+        fetch(`/jogos/timesCaros`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    var dados = {
+                        labels: [],
+                        datasets: [
+                            {
+                                yAxisID: 'y-temperatura',
+                                label: 'Temperatura',
+                                borderColor: 'rgba(255,0,0,1)',
+                                backgroundColor: 'rgba(255,0,0,1)',
+                                fill: false,
+                                data: []
+                            },
+                            {
+                                yAxisID: 'y-umidade',
+                                label: 'Umidade',
+                                borderColor: 'rgba(255,0,255,1)',
+                                backgroundColor: 'rgba(255,0,255,1)',
+                                fill: false,
+                                data: []
+                            }
+                        ]
+                    };
+                    for (i = 0; i < resposta.length; i++) {
+                        var registro = resposta[i];
+                        dados.labels.push(registro.Abreviacao);
+                        dados.datasets[0].data.push(registro.valorElenco);
+
+                    }
+                    console.log(JSON.stringify(dados));
+                    div_aguarde.style.display = 'none';
+                    plotarGrafico(dados, idcaminhao);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }*/
+
+    function rakingTimeGols(){
+        var tabela=`<table>
+                <tr>
+                    <th colspan="2">Time</th>
+                    <th>Gols Feitos</th>
+                </tr>`;
+        fetch(`/jogos/timesGols`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(json => {
+                    for(var contador=0;contador<json.length;contador++){
+                        tabela+=`
+                            <tr>
+                                <td>${contador+1}º</td>
+                                <td>${json[contador].nomeTime}</td>
+                                <td>${json[contador].golsFeitos}</td>    
+                            </tr>
+                        `;               
+                    }
+                    tabela+=`
+                        </table>
+                    `;
+                    timeGols.innerHTML=tabela;
+                });
+            }
+        });
+    }
+
+    function rakingTimeGolsLevados(){
+        var tabela=`<table>
+                <tr>
+                    <th colspan="2">Time</th>
+                    <th>Gols Levados</th>
+                </tr>`;
+        fetch(`/jogos/timesLevado`, { cache: 'no-store' }).then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(golsLevados => {
+                    for(var contador=0;contador<golsLevados.length;contador++){
+                        tabela+=`
+                            <tr>
+                                <td>${contador+1}º</td>
+                                <td>${golsLevados[contador].nomeTime}</td>
+                                <td>${golsLevados[contador].golsLevados}</td>    
+                            </tr>
+                        `;               
+                    }
+                    tabela+=`
+                        </table>
+                    `;
+                    timeGolsLevados.innerHTML=tabela;
+                });
+            }
+        });
+    }
 </script>

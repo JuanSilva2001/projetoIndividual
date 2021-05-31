@@ -55,9 +55,62 @@ router.get('/Partida/:qualRodada', function(req,res,next){
   	});
 });
 
-router.get('/partidasGrupos/:qualRodada', function (req, res, next){
-	var SQL= '';
+router.get('/partidasGrupos/:vetorRodadaGrupo', function (req, resGrupo, next){
+	var vetorRodadaGrupo = req.params.vetorRodadaGrupo;
+	var grupoSQL= `select * from Jogos inner join dadosJogos on fkDados=idJogos inner join Times on fkTimes=idTime inner join
+	Grupos on fkTimes=fkTime where fkRodada=${vetorRodadaGrupo[0]} and Grupo='${vetorRodadaGrupo[2]}' order by fkDados, casaFora;`;
+	console.log(grupoSQL);
+	sequelize.query(grupoSQL, {
+		model: Jogos
+	}).then(resultadoGrupo => {
+		console.log(`Encontrados: ${resultadoGrupo.length}`);
+			resGrupo.json(resultadoGrupo);
+	}).catch(erro => {
+		console.error(erro);
+		resGrupo.status(500).send(erro.message);
+  	});
+});
 
+router.get('/timesCaros', function (req, res, next){
+	var timeCaroSQL= `select * from Times order by valorElenco desc`;
+	console.log(timeCaroSQL);
+	sequelize.query(timeCaroSQL, {
+		model: Times
+	}).then(resultado => {
+		console.log(`Encontrados: ${resultado.length}`);
+			res.json(resultado);
+	}).catch(erro => {
+		console.error(erro);
+		resGrupo.status(500).send(erro.message);
+  	});
+});
+
+router.get('/timesGols', function (req, res, next){
+	var timeGolsSQL= `select * from Times order by golsFeitos desc limit 0,7`;
+	console.log(timeGolsSQL);
+	sequelize.query(timeGolsSQL, {
+		model: Jogos
+	}).then(resultado => {
+		console.log(`Encontrados: ${resultado.length}`);
+			res.json(resultado);
+	}).catch(erro => {
+		console.error(erro);
+		resGrupo.status(500).send(erro.message);
+  	});
+});
+
+router.get('/timesLevado', function (req, res, next){
+	var timeGolsLevadosSQL= `select * from Times order by golsLevados asc limit 0,7`;
+	console.log(timeGolsLevadosSQL);
+	sequelize.query(timeGolsLevadosSQL, {
+		model: Jogos
+	}).then(resultadoGolsLevado => {
+		console.log(`Encontrados: ${resultadoGolsLevado.length}`);
+			res.json(resultadoGolsLevado);
+	}).catch(erro => {
+		console.error(erro);
+		resGrupo.status(500).send(erro.message);
+  	});
 });
 
 module.exports = router;
