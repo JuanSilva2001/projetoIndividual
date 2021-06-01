@@ -7,7 +7,7 @@
     <title>Simulação</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body onload="tabelaJogos(8,0);">
+<body onload="tabelaJogos(8,0);verificar()">
     <div class="header">
         <ul class="UL_Esquerda">
             <li><a href="Temp.html">Temporada</a></li>
@@ -33,6 +33,9 @@
     </div>
 <div id='Jogos'>
 
+</div>
+<div class='Rodapé'>
+    <span>Site feito por: Juan Silva© Email de contato: Juan.Silva@bandtec.com.br</span>
 </div>
 </body>
 </html>
@@ -342,11 +345,24 @@
     }
    }
    function Final(){
-       verifica=casa1.value+fora1.value;
-    if(verifica.length==2){
-                    arrayGolsJogoFinal[0]=verifica;
-                    alert(Campeao(timeFinal[0],timeFinal[1],casa1.value, fora1.value));
-                }
-                verifica='';
+        verifica=casa1.value+fora1.value;
+        if(verifica.length==2){
+            arrayGolsJogoFinal[0]=verifica;
+            alert(Campeao(timeFinal[0],timeFinal[1],casa1.value, fora1.value));
+        }
+        verifica='';
    }
+   function verificar(){
+        var usuario = verificar_autenticacao();
+        var Site = '';
+        if(usuario == 'login'){
+            redirecionar_login();
+        }
+        else{
+            Site = 'Logout.html';
+        }
+        idLogin.innerHTML=usuario;
+        idLogin.href=Site;  
+    }
 </script>
+<script src='./funcoes.js'></script>

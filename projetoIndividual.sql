@@ -23,28 +23,10 @@ create table Times(
     idTime int primary key auto_increment,
     nomeTime varchar(45),
     Abreviacao char(3),
-    Emblema varchar(45),
-    golsFeitos int,
-    golsLevados int,
-    valorElenco varchar(20),
-    fkPais int,
-    foreign key (fkPais) references Pais(idPais) 
-);
-
-create table Artilheiros(
-    idJogador int primary key auto_increment,
-    nomeJogador varchar(45),
-    qtdGols int,
-    qtdGolsAtual int,
-    fkPais int,
-    foreign key (fkPais) references Pais(idPais) 
-);
-
-create table Assistência (
-    idJogador int primary key auto_increment,
-    nomeJogador varchar(45),
-    qtdPasse int,
-    qtdPasseAtual int,
+    Emblema char(7) unique,
+    golsFeitos int check(golsFeitos>=0),
+    golsLevados int check(golsLevados>=0),
+    valorElenco decimal(5,2),
     fkPais int,
     foreign key (fkPais) references Pais(idPais) 
 );
@@ -58,14 +40,6 @@ create table dadosJogos(
     foreign key (fkRodada) references Rodada(idRodada)
 );
 
-create table Simulacao(
-	idSimulacao int primary key auto_increment ,
-	fkUsuario int,
-	fkRodada int,
-	foreign key (fkUsuario) references Usuario(idUsuario),
-	foreign key (fkRodada) references Rodada(IdRodada)
-);
-
 create table Grupos(
     fkTime int,
     Grupo char(1),
@@ -74,10 +48,10 @@ create table Grupos(
     V int,
     D int,
     E int,
-    GP int,
-    GC int,
+    GP int check(GP>=0),
+    GC int check(GC>=0),
     SG int,
-    Aproveitamento decimal(5,2),
+    Aproveitamento decimal(5,2) check(Aproveitamento >=0 and Aproveitamento<=100.00),
     foreign key (fkTime) references Times(idTime)
 );
 
@@ -85,16 +59,8 @@ create table Jogos(
     fkDados int,
     fkTimes int,
     golsFeitosJogo int ,
+    primary key(fkDados,fkTimes),
     casaFora char(1) check (casaFora='C' or casaFora='F'),
     foreign key (fkDados) references dadosJogos(idJogos),
-    foreign key (fkTimes) references Times(idTime)
-);
-
-create table jogoSimulacao (
-    fkSimulacao int,
-    fkTimes int,
-    golsFeitos int, 
-    casaFora char(1),
-    foreign key (fkSimulacao) references Simulacao(idSimulacao),
     foreign key (fkTimes) references Times(idTime)
 );

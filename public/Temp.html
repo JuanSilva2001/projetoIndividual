@@ -125,7 +125,7 @@
                                 vetorDadosPorGrupo.push(vetorDadosTime);
                             }
                             Jogos.innerHTML+=Grupo(vetorGrupos[contador], vetorTimesPorGrupo, vetorDadosPorGrupo);
-                            Jogos.innerHTML+=`</td><td>
+                            Jogos.innerHTML+=`
                                 <table class='jogosGrupo'>
                                     <tr>
                                         <th colspan="7">
@@ -199,56 +199,20 @@
                         }
                     break;
                     case 4:
-                        for(var contador=0;contador<8;contador++){
-                            Jogos.innerHTML+=`
-                            <table class="Confronto">
-                                <tr>
-                                    <th colspan="7" style='border-right: #F2C063 3px solid;'>A defenir</th>
-                                    <th colspan="7">A defenir</th>
-                                </tr>
-                                <tr class="Casa">
-                                    <td>
-
-                                    </td>
-                                    <td>
-                                        <span class="Time">P2</span>
-                                    </td>
-                                    <td>
-                                        <span class="Placar"></span>
-                                    </td>
-                                    <td>
-                                        <span class="X">X</span>
-                                    </td>
-                                    <td>
-                                        <span class="Placar"></span>
-                                    </td>
-                                    <td>
-                                        <span class="Time">P1</span>
-                                    </td>
-                                    <td style='border-right: #F2C063 3px solid;'>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                        <span class="Time">P1</span>
-                                    </td>
-                                    <td>
-                                        <span class="Placar"></span>
-                                    </td>
-                                    <td>
-                                        <span class="X">X</span>
-                                    </td>
-                                    <td>
-                                        <span class="Placar"></span>
-                                    </td>
-                                    <td>
-                                        <span class="Time">P2</span>
-                                    </td>
-                                    <td>
-                                    </td>
-                                </tr>
-                            </table>`;
-                        }
+                    for(var contador=0; contador<16; contador+=2){
+                        var dadosPrimeiroJogo=converterDia(json[contador].dia)+' '+json[contador].estadioJogo+ ' '+ json[contador].horas;
+                        var dadosSegundoJogo=converterDia(json[json.length-(16-contador)].dia)+' '+json[json.length-(16-contador)].estadioJogo+ ' '+ json[json.length-(16-contador)].horas;
+                        var placarIda= ['',''];
+                        var placarVolta= ['',''];
+                        Jogos.innerHTML+=matamata(
+                            json[contador].Abreviacao,
+                            json[contador+1].Abreviacao,
+                            dadosPrimeiroJogo,
+                            dadosSegundoJogo,
+                            placarIda,
+                            placarVolta
+                            );
+                    }
                     break;
                     
                     case 5:
@@ -512,9 +476,9 @@
                     </tr>
             `;
         for(var contador=0; contador<4; contador++){
-            var cor='white';
-            if(contador<=1){cor='green';}
-            else if(contador==2){cor='blue';}
+            var cor='#f0f0f0';
+            if(contador<=1){cor='#33CC66';}
+            else if(contador==2){cor='#3366CC';}
             tabela +=`
             <tr class='Tabela'>
                 <td style='color:${cor}'>${contador+1}</td>
