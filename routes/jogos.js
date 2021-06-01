@@ -55,10 +55,11 @@ router.get('/Partida/:qualRodada', function(req,res,next){
   	});
 });
 
-router.get('/partidasGrupos/:vetorRodadaGrupo', function (req, resGrupo, next){
-	var vetorRodadaGrupo = req.params.vetorRodadaGrupo;
+router.get('/partidasGrupos/:rodadaGrupo,:Grupo', function (req, resGrupo, next){
+	rodadaGrupo=req.params.rodadaGrupo;
+	Grupo=req.params.Grupo;
 	var grupoSQL= `select * from Jogos inner join dadosJogos on fkDados=idJogos inner join Times on fkTimes=idTime inner join
-	Grupos on fkTimes=fkTime where fkRodada=${vetorRodadaGrupo[0]} and Grupo='${vetorRodadaGrupo[2]}' order by fkDados, casaFora;`;
+	Grupos on fkTimes=fkTime where fkRodada=${rodadaGrupo} and Grupo='${Grupo}' order by fkDados, casaFora;`;
 	console.log(grupoSQL);
 	sequelize.query(grupoSQL, {
 		model: Jogos
@@ -86,7 +87,7 @@ router.get('/timesCaros', function (req, res, next){
 });
 
 router.get('/timesGols', function (req, res, next){
-	var timeGolsSQL= `select * from Times order by golsFeitos desc limit 0,7`;
+	var timeGolsSQL= `select * from Times order by golsFeitos desc limit 0,10`;
 	console.log(timeGolsSQL);
 	sequelize.query(timeGolsSQL, {
 		model: Jogos
@@ -100,13 +101,27 @@ router.get('/timesGols', function (req, res, next){
 });
 
 router.get('/timesLevado', function (req, res, next){
-	var timeGolsLevadosSQL= `select * from Times order by golsLevados asc limit 0,7`;
+	var timeGolsLevadosSQL= `select * from Times order by golsLevados asc limit 0,10`;
 	console.log(timeGolsLevadosSQL);
 	sequelize.query(timeGolsLevadosSQL, {
 		model: Jogos
 	}).then(resultadoGolsLevado => {
 		console.log(`Encontrados: ${resultadoGolsLevado.length}`);
 			res.json(resultadoGolsLevado);
+	}).catch(erro => {
+		console.error(erro);
+		resGrupo.status(500).send(erro.message);
+  	});
+});
+
+router.get('/timesValor', function (req, res, next){
+	var timeValor= `select * from Times order by valorElenco desc limit 0,10`;
+	console.log(timeValor);
+	sequelize.query(timeValor, {
+		model: Jogos
+	}).then(resultadoTimeValor => {
+		console.log(`Encontrados: ${resultadoTimeValor.length}`);
+			res.json(resultadoTimeValor);
 	}).catch(erro => {
 		console.error(erro);
 		resGrupo.status(500).send(erro.message);

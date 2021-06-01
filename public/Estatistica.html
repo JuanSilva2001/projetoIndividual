@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body onload='verificar();rakingTimeGols();rakingTimeGolsLevados()'>
+<body onload='verificar();rakingTimeGols();rakingTimeGolsLevados();rakingTimesCaros()'>
     <div class="header">
         <ul class="UL_Esquerda">
             <li><a href="Temp.html">Temporada</a></li>
@@ -136,6 +136,13 @@
         <div id='timeGolsLevados'>
             
         </div>
+
+        <div id='timesCaros'>
+            
+        </div>
+    </div>
+    <div class='Rodapé'>
+        <span>Site feito por: Juan Silva© Email de contato: Juan.Silva@bandtec.com.br</span>
     </div>
 </body>
 
@@ -155,55 +162,6 @@
         idLogin.innerHTML=usuario;
         idLogin.href=Site;  
     }
-    
-    /*function obterDadosGraficoPrimeiraVez() {
-        console.log("executei obterDadosGraficoPrimeiraVez")
-        fetch(`/jogos/timesCaros`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-
-                    var dados = {
-                        labels: [],
-                        datasets: [
-                            {
-                                yAxisID: 'y-temperatura',
-                                label: 'Temperatura',
-                                borderColor: 'rgba(255,0,0,1)',
-                                backgroundColor: 'rgba(255,0,0,1)',
-                                fill: false,
-                                data: []
-                            },
-                            {
-                                yAxisID: 'y-umidade',
-                                label: 'Umidade',
-                                borderColor: 'rgba(255,0,255,1)',
-                                backgroundColor: 'rgba(255,0,255,1)',
-                                fill: false,
-                                data: []
-                            }
-                        ]
-                    };
-                    for (i = 0; i < resposta.length; i++) {
-                        var registro = resposta[i];
-                        dados.labels.push(registro.Abreviacao);
-                        dados.datasets[0].data.push(registro.valorElenco);
-
-                    }
-                    console.log(JSON.stringify(dados));
-                    div_aguarde.style.display = 'none';
-                    plotarGrafico(dados, idcaminhao);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
-    }*/
 
     function rakingTimeGols(){
         var tabela=`<table>
@@ -254,6 +212,33 @@
                         </table>
                     `;
                     timeGolsLevados.innerHTML=tabela;
+                });
+            }
+        });
+    }
+
+    function rakingTimesCaros(){
+        var tabela=`<table>
+                <tr>
+                    <th colspan="2">Time</th>
+                    <th>Valor Elenco</th>
+                </tr>`;
+        fetch(`/jogos/timesValor`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(json => {
+                    for(var contador=0;contador<json.length;contador++){
+                        tabela+=`
+                            <tr>
+                                <td>${contador+1}º</td>
+                                <td>${json[contador].nomeTime}</td>
+                                <td>${json[contador].valorElenco}Mi. €</td>    
+                            </tr>
+                        `;               
+                    }
+                    tabela+=`
+                        </table>
+                    `;
+                    timesCaros.innerHTML=tabela;
                 });
             }
         });

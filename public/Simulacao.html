@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ptt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulação</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="tabelaJogos(8,0);">
+    <div class="header">
+        <ul class="UL_Esquerda">
+            <li><a href="Temp.html">Temporada</a></li>
+            <li><a href="Hist.html">Historia</a></li>
+        </ul>
+        <a href="index.html"><img src='./Imagens/marca.png'></a>
+        <ul class="UL_Direita">
+            <li><a>Estatistica</a>
+                <ul>
+                    <li><a href="Estatistica.html">Atual</a></li>
+                    <li><a href="estHist.html">Historia</a></li>
+                </ul>
+            </li>
+            <li><a id='idLogin'></a></li>
+        </ul>
+    </div>
+    <div class="Rodada">
+        <div class='Meio'>
+            <button style="float: left;" onclick="anteriorRodada()"><img src="./Imagens/setaEsquerda.png"></button>
+            <p id='idRodada'>Oitavas</p>
+            <button style="float: right;" onclick="proximaRodada()"><img src="./Imagens/setaDireita.png"></button>
+        </div>
+    </div>
+<div id='Jogos'>
+
+</div>
+</body>
+</html>
+<script>
+    var verifica;
+    var timeCasaOitavas = ['DYJ','OLI','VEL','CER','BOC','RIV','SÃO','UCA'];
+    var timeForaOitavas = ['FLA','INT','BAR','FLU','CAM','AGJ','RAC','PAL'];
+    var timeCasaQuartas = ['','','',''];
+    var timeForaQuartas = ['','','',''];
+    var timeCasaSemi = ['',''];
+    var timeForaSemi = ['',''];
+    var timeFinal = ['',''];
+    var arrayTimeCasa = [timeCasaOitavas, timeCasaQuartas, timeCasaSemi];
+    var arrayTimeFora = [timeForaOitavas, timeForaQuartas, timeForaSemi];
+    var Fases = ['Oitavas', 'Quartas', 'Semi', 'Final'];
+    var qualRodada = 0;
+    var arrayGolsJogoOitavas=[null,null,null,null,null,null,null,null];
+    var arrayGolsJogoQuartas=[null,null,null,null];
+    var arrayGolsJogoSemi=[null,null];
+    var arrayGolsJogoFinal=[null];
+    var arrayGolsJogo=[arrayGolsJogoOitavas, arrayGolsJogoQuartas, arrayGolsJogoSemi];
+    function proximaRodada() {
+        if (qualRodada < 3 && qualRodada >= 0) {
+            qualRodada++;
+            idRodada.innerHTML = Fases[qualRodada];
+            switch (Fases[qualRodada]){
+                case 'Oitavas':
+                    Oitavas();
+                break;
+                case 'Quartas':
+                    Quartas();
+                break;
+            
+                case 'Semi':
+                    Semi();
+                break;
+
+                case 'Final':
+                    tabelaFinal(timeFinal[0],timeFinal[1]);
+                break;
+            }
+        }
+    }
+    function anteriorRodada() {
+        if (qualRodada < 4 && qualRodada > 0) {
+            qualRodada--;
+            idRodada.innerHTML = Fases[qualRodada];
+            switch (Fases[qualRodada]){
+                case 'Oitavas':
+                    Oitavas();
+                break;
+            }
+            switch (Fases[qualRodada]){
+                case 'Quartas':
+                    Quartas();
+                break;
+            }
+            switch (Fases[qualRodada]){
+                case 'Semi':
+                    Semi();
+                break;
+            }
+        }
+    }
+    function Placar(Jogo, Fase){
+        switch (Jogo) {
+            case 0:
+                verifica = (casaA1.value + casaB1.value + foraA1.value + foraB1.value);
+                if (verifica.length == 4) {
+                    if(Fase==0){
+                    arrayGolsJogoOitavas[0]=verifica;
+                   timeCasaQuartas[0]=quemPassa(casaA1.value, casaB1.value, foraA1.value,foraB1.value,arrayTimeCasa[Fase][0],arrayTimeFora[Fase][0]);
+                }
+                else if(Fase==1){
+                    arrayGolsJogoQuartas[0]=verifica;
+                    timeCasaSemi[0]=quemPassa(casaA1.value, casaB1.value, foraA1.value,foraB1.value,arrayTimeCasa[Fase][0],arrayTimeFora[Fase][0]);
+                }
+                else{
+                    arrayGolsJogoSemi[0]=verifica;
+                    timeFinal[0]=quemPassa(casaA1.value, casaB1.value, foraA1.value,foraB1.value,arrayTimeCasa[Fase][0],arrayTimeFora[Fase][0]);
+                }
+            }
+            break;
+            case 1:
+            verifica = (casaA2.value + casaB2.value + foraA2.value + foraB2.value);
+                if (verifica.length == 4) {
+                    if(Fase==0){
+                    arrayGolsJogoOitavas[1]=verifica;
+                   timeForaQuartas[0]=quemPassa(casaA2.value, casaB2.value, foraA2.value,foraB2.value,arrayTimeCasa[Fase][1],arrayTimeFora[Fase][1]);
+                }
+                else if(Fase==1){
+                    arrayGolsJogoQuartas[1]=verifica;
+                    timeForaSemi[0]=quemPassa(casaA2.value, casaB2.value, foraA2.value,foraB2.value,arrayTimeCasa[Fase][1],arrayTimeFora[Fase][1]);
+                }
+                else{
+                    arrayGolsJogoSemi[1]=verifica;
+                    timeFinal[1]=quemPassa(casaA2.value, casaB2.value, foraA2.value,foraB2.value,arrayTimeCasa[Fase][1],arrayTimeFora[Fase][1]);
+                }
+            }
+            break;
+            case 2:
+                verifica = (casaA3.value + casaB3.value + foraA3.value + foraB3.value);
+                if (verifica.length == 4) {
+                    if(Fase==0){
+                    arrayGolsJogoOitavas[2]=verifica;
+                   timeCasaQuartas[1]=quemPassa(casaA3.value, casaB3.value, foraA3.value,foraB3.value,arrayTimeCasa[Fase][2],arrayTimeFora[Fase][2]);
+                }
+                else{
+                    arrayGolsJogoQuartas[2]=verifica;
+                    timeCasaSemi[1]=quemPassa(casaA3.value, casaB3.value, foraA3.value,foraB3.value,arrayTimeCasa[Fase][2],arrayTimeFora[Fase][2]);
+                }
+                }
+            break;
+            case 3:
+            verifica = (casaA4.value + casaB4.value + foraA4.value + foraB4.value);
+                if (verifica.length == 4) {
+                    if(Fase==0){
+                    arrayGolsJogoOitavas[3]=verifica;
+                   timeForaQuartas[1]=quemPassa(casaA4.value, casaB4.value, foraA4.value,foraB4.value,arrayTimeCasa[Fase][3],arrayTimeFora[Fase][3]);
+                }
+                else{
+                    arrayGolsJogoQuartas[3]=verifica;
+                    timeForaSemi[1]=quemPassa(casaA4.value, casaB4.value, foraA4.value,foraB4.value,arrayTimeCasa[Fase][3],arrayTimeFora[Fase][3]);
+                }
+                }
+            break;
+            case 4:
+            verifica = (casaA5.value + casaB5.value + foraA5.value + foraB5.value);
+                if (verifica.length == 4) {
+                    arrayGolsJogoOitavas[4]=verifica;
+                    timeCasaQuartas[2]=quemPassa(casaA5.value, casaB5.value, foraA5.value,foraB5.value,arrayTimeCasa[Fase][4],arrayTimeFora[Fase][4]);
+                   verifica='';
+                }
+            break;
+            case 5:
+            verifica = (casaA6.value + casaB6.value + foraA6.value + foraB6.value);
+                if (verifica.length == 4) {
+                    arrayGolsJogoOitavas[5]=verifica;
+                    timeForaQuartas[2]=quemPassa(casaA6.value, casaB6.value, foraA6.value,foraB6.value,arrayTimeCasa[Fase][5],arrayTimeFora[Fase][5]);
+                   verifica='';
+                }
+            break;
+            case 6:
+            verifica = (casaA7.value + casaB7.value + foraA7.value + foraB7.value);
+                if (verifica.length == 4) {
+                    arrayGolsJogoOitavas[6]=verifica;
+                    timeCasaQuartas[3]=quemPassa(casaA7.value, casaB7.value, foraA7.value,foraB7.value,arrayTimeCasa[Fase][6],arrayTimeFora[Fase][6]);
+                   verifica='';
+                }
+            break;
+            case 7:
+            verifica = (casaA8.value + casaB8.value + foraA8.value + foraB8.value);
+                if (verifica.length == 4) {
+                    arrayGolsJogoOitavas[7]=verifica;
+                    timeForaQuartas[3]=quemPassa(casaA8.value, casaB8.value, foraA8.value,foraB8.value,arrayTimeCasa[Fase][7],arrayTimeFora[Fase][7]);
+                   verifica='';
+                }
+            break;
+            }
+    }   
+    function quemPassa(golsCasa1, golsCasa2, golsFora1, golsFora2, time1, time2){
+        var golsTime1 = Number(golsCasa1) + Number(golsFora2); 
+        var golsTime2 = Number(golsFora1) + Number(golsCasa2);
+        if(golsTime1>golsTime2){
+            return time1;
+        } 
+        else if(golsTime2 > golsTime1){
+            return time2;
+        }
+        else if(golsFora1 > golsFora2){
+            return time2;
+        }
+        else if(golsFora2 > golsFora1){
+            return time1;
+        }
+        else{
+            alert('Desempata');
+            return '';
+        }
+    }
+   function tabelaJogos(qtdJogos, Fase){
+       for(var laço = 0; laço< qtdJogos; laço++){
+       Jogos.innerHTML+=`
+       <table class="Confronto">
+            <tr class="Casa">
+                <td>
+                    <img src='./Imagens/Times/${arrayTimeCasa[Fase][laço]}.png'>
+                </td>
+                <td>
+                    <span class="Time">${arrayTimeCasa[Fase][laço]}</span>
+                </td>
+                <td>
+                    <span class="Placar"><input id='${'casaA'+(laço+1)}' maxlength="1" onkeyup='Placar(${laço},${Fase})'></span>
+                </td>
+                <td>
+                    <span class="X">X</span>
+                </td>
+                <td>
+                    <span class="Placar"><input id=${'foraA'+(laço+1)} maxlength="1" onkeyup='Placar(${laço},${Fase})'></span>
+                </td>
+                <td>
+                    <span class="Time">${arrayTimeFora[Fase][laço]}</span>
+                </td>
+                <td style='border-right: #F2C063 3px solid;'>
+                    <img src='./Imagens/Times/${arrayTimeFora[Fase][laço]}.png'>
+                </td>
+                <td>
+                    <img src='./Imagens/Times/${arrayTimeFora[Fase][laço]}.png'>
+                </td>
+                <td>
+                    <span class="Time">${arrayTimeFora[Fase][laço]}</span>
+                </td>
+                <td>
+                    <span class="Placar"><input id=${'casaB'+(laço+1)} maxlength="1" onkeyup='Placar(${laço},${Fase})'></span>
+                </td>
+                <td>
+                    <span class="X">X</span>
+                </td>
+                <td>
+                    <span class="Placar"><input id=${'foraB'+(laço+1)} maxlength="1" onkeyup='Placar(${laço},${Fase})'></span>
+                </td>
+                <td>
+                    <span class="Time">${arrayTimeCasa[Fase][laço]}</span>
+                </td>
+                <td>
+                    <img src='./Imagens/Times/${arrayTimeCasa[Fase][laço]}.png'>
+                </td>
+            </tr>
+        </table>`;
+}
+   }
+   function Oitavas(){
+       Jogos.innerHTML='';
+       tabelaJogos(8,0);
+       carregarPlacar(8,0);
+   }
+   function Quartas(){
+        Jogos.innerHTML='';
+       tabelaJogos(4,1);
+       carregarPlacar(4,1);
+   }
+   function Semi(){
+    Jogos.innerHTML='';
+       tabelaJogos(2,2);
+       carregarPlacar(2,2);
+   }
+   function carregarPlacar(Jogos, Fase){
+    for(var laço = 0; laço< Jogos; laço++){
+        if(arrayGolsJogo[Fase]!=null && arrayGolsJogo[Fase][laço]!=null){
+            var campo1 = document.getElementById('casaA'+(laço+1));
+            var campo2 = document.getElementById('casaB'+(laço+1));
+            var campo3 = document.getElementById('foraA'+(laço+1));
+            var campo4 = document.getElementById('foraB'+(laço+1));
+            campo1.value=arrayGolsJogo[Fase][laço][0];
+            campo2.value=arrayGolsJogo[Fase][laço][1];
+            campo3.value=arrayGolsJogo[Fase][laço][2];
+            campo4.value=arrayGolsJogo[Fase][laço][3];
+    }
+        
+    }
+   }
+   function Campeao(Time1, Time2, gols1, gols2){
+       if(gols1>gols2){
+           return Time1;
+       }
+       else if(gols2>gols1){
+           return Time2;
+       }
+       else{
+           return 'Desempata';
+       }
+   }
+   function tabelaFinal(time1, time2){
+        Jogos.innerHTML=`
+        <table class="Confronto">
+        <tr>
+            <th colspan="7">SAB 21/10 Centenario 16:00</th>
+        </tr>
+    <tr class="Casa">
+        <td>
+            <img src='./Imagens/Times/${time1}.png'>
+        </td>
+        <td>
+            <span class="Time">${time1}</span>
+        </td>
+        <td>
+            <span class="Placar"><input id='casa1' maxlength="1" onkeyup='Final()'></span>
+        </td>
+        <td>
+            <span class="X">X</span>
+        </td>
+        <td>
+            <span class="Placar"><input id='fora1' maxlength="1" onkeyup='Final()'></span>
+        </td>
+        <td>
+            <span class="Time">${time2}</span>
+        </td>
+        <td>
+            <img src='./Imagens/Times/${time2}.png'>
+        </td>
+        </tr>
+        </table>
+        `;
+        if(arrayGolsJogoFinal[0]!=null){
+        casa1.value=arrayGolsJogoFinal[0][0];
+        fora1.value=arrayGolsJogoFinal[0][1];
+    }
+   }
+   function Final(){
+       verifica=casa1.value+fora1.value;
+    if(verifica.length==2){
+                    arrayGolsJogoFinal[0]=verifica;
+                    alert(Campeao(timeFinal[0],timeFinal[1],casa1.value, fora1.value));
+                }
+                verifica='';
+   }
+</script>

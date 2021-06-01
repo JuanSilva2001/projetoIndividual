@@ -169,64 +169,106 @@ body {
 
 .Grupo {
     height: 200px;
-    margin-top: 50px;
+    width: 600px;
     border: #F2C063 solid 2px;
     background-color:  #0D0D0D;
     color: white;
     border-collapse: collapse;
     text-align: center;
+    float: left;
+    margin-left: 100px;
 }
 
-.Grupo .Tabela{
+.jogosGrupo{
+    height: 200px;
+    width: 400px;
+    border: #F2C063 solid 2px;
+    background-color:  #0D0D0D;
+    color: white;
+    border-collapse: collapse;
+    text-align: center;
+    margin-left: 0px;
+}
+
+.Tabela{
     border-bottom: #F2C063 solid 2px;
 }
 
-.Grupo tr #classificacao{
+#classificacao{
     width: 200px;
 }
 
-
-.Grupo tr th{
-    width: 40px;
+#nomeGrupo{
+    color:#0d0d0d;
+    margin-top: 50px;
+    font-size: 30px;
+    margin-left: 100px;
+    font-weight: lighter;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.Grupo tr td img {
+.Grupo tr th{
+    height: 45px;
+}
+
+.jogosGrupo tr th{
+    width: 40px;
+    height: 45px;
+}
+
+.jogosGrupo tr td{
+    height: 15px;
+}
+
+.jogosGrupo tr td img {
     height: 40px;
 }
 
-.Grupo tr td .Placar {
+.Placar {
     font-size: 20px;
     font-weight: bolder;
 }
 
-.Grupo tr td .Time {
+.Placar input{
+    font-size: 20px;
+    border: none;
+    width: 20px;
+    text-align: center;
+    height: 30px;
+}
+
+.Placar input:focus{
+    outline: none;
+}
+
+.Time {
     font-size: 25px;
 }
 
-.Grupo tr td .X {
+.X {
     font-size: 15px;
 }
 
-.Grupo #rodadaGrupo{
+#rodadaGrupo{
     width: 400px;
 }
 
-.Grupo #rodadaGrupo h1{
+#rodadaGrupo h1{
     margin-left: 10px;
     margin-right: 10px;
     color: white;
 }
 
-.Grupo #rodadaGrupo button{
+#rodadaGrupo button{
     border: none;
     background-color: transparent;
 }
 
-.Grupo #jogoGrupo{
+#jogoGrupo{
     height: 56px;
 }
 
-.Grupo #rodadaGrupo p{
+#rodadaGrupo p{
     color:white;
     display: inline-block;
 }
@@ -239,6 +281,7 @@ body {
     border-radius: 10px;
     text-align: center;
     margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .Login input{
@@ -296,6 +339,7 @@ body {
     border-radius: 10px;
     text-align: center;
     margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .Cadastro input{
@@ -431,7 +475,6 @@ body {
 }
 
 .Fundacao .Dinheiro{
-    border-bottom: #F2C063 4px solid;
     height: 30%;
 }
 
@@ -441,7 +484,235 @@ body {
 }
 
 .artilheirosHistoricos {
-    width: 400px;
-    height: 100px;
+    width: 320px;
+    height: 250px;
     float: left;
+    border: #F2C063 2px solid;
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+.artilheirosHistoricos table{
+ width: 100%;
+ text-align: center;
+ border-collapse: collapse;
+}
+
+.artilheirosHistoricos table tr:hover{
+    background-color: #f0f0f0;
+    color:#0d0d0d;
+}
+
+.timeComMaisGols {
+    width: 320px;
+    height: 210px;
+    float: left;
+    border: #F2C063 2px solid;
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+.timeComMaisGols table{
+ width: 100%;
+ text-align: center;
+ border-collapse: collapse;
+}
+
+.timeComMaisGols table tr:hover{
+    background-color: #f0f0f0;
+    color:#0d0d0d;
+}
+
+.timeComMaisTitulos {
+    width: 320px;
+    height: 210px;
+    float: left;
+    border: #F2C063 2px solid;
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+.timeComMaisTitulos table{
+ width: 100%;
+ text-align: center;
+ border-collapse: collapse;
+}
+
+.timeComMaisTitulos table tr:hover{
+    background-color: #f0f0f0;
+    color:#0d0d0d;
+}
+
+.Grafico {
+    width: 320px;
+    height: 300px;
+    float: left;
+    border: #F2C063 2px solid;
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+#Artilheiros {
+    width: 450px;
+    height: 150px;
+    float: left;
+    border: #F2C063 2px solid;
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+    margin-left: 100px;
+    margin-top: 20px;
+}
+
+#Artilheiros table{
+ width: 100%;
+ text-align: center;
+ border-collapse: collapse;
+}
+
+#Artilheiros table tr:hover{
+    background-color: #f0f0f0;
+    color:#0d0d0d;
+}
+
+#Assistencias {
+    width: 450px;
+    height: 150px;
+    float: left;
+    border: #F2C063 2px solid;
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+#Assistencias table{
+ width: 100%;
+ text-align: center;
+ border-collapse: collapse;
+}
+
+#Assistencias table tr:hover{
+    background-color: #f0f0f0;
+    color:#0d0d0d;
+}
+
+#timeGols {
+    width: 300px;
+    height: 210px;
+    float: left;
+    border: #F2C063 2px solid;
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+    margin-left: 70px;
+    margin-top: 20px;
+}
+
+#timeGols table{
+ width: 100%;
+ text-align: center;
+ border-collapse: collapse;
+}
+
+#timeGols table tr:hover{
+    background-color: #f0f0f0;
+    color:#0d0d0d;
+}
+
+#timeGolsLevados {
+    width: 350px;
+    height: 210px;
+    float: left;
+    border: #F2C063 2px solid;
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+#timeGolsLevados table{
+ width: 100%;
+ text-align: center;
+ border-collapse: collapse;
+}
+
+#timeGolsLevados table tr:hover{
+    background-color: #f0f0f0;
+    color:#0d0d0d;
+}
+
+#timesCaros {
+    width: 300px;
+    height: 210px;
+    float: left;
+    border: #F2C063 2px solid;
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+#timesCaros table{
+ width: 100%;
+ text-align: center;
+ border-collapse: collapse;
+}
+
+#timesCaros table tr:hover{
+    background-color: #f0f0f0;
+    color:#0d0d0d;
+}
+
+#Simulacao{
+    height: 70px;
+    background-color: #0d0d0d;
+    text-align: center;
+    border-top:#F2C063 4px solid;
+    margin-top: 50px;
+    padding-top: 30px;
+}
+
+#Simulacao button{
+    width: 150px;
+    height: 40px;
+    background-color: #F2C063;
+    border: none;
+    font-weight: bolder;
+    color:#0d0d0d;
+}
+
+#Simulacao span{
+    color:white;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.Rodapé{
+    height: 40px;
+    background-color: #0D0D0D;
+    border-top: #F2C063 4px solid;
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+    font-weight: bolder;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.Historia{
+    height: 1420px;
+}
+
+.artilheirosAssistencias{
+    height: 450px;
+}
+
+.estatisticaHistorica{
+    height: 600px;
 }
