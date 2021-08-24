@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+<body onload="pegandoData()">
+    <div class='menuLateral'>
+        <img src='./Imagens/LogoPreto.png'>
+        <button onclick='redirecionar("dashboardTIGeral")' style='margin-top: 50vh;'><img src='./Imagens/graficoGeral.png'></button>
+        <button id='botaoEscolhido'><img src='./Imagens/relatorioEscolhido.png'></button>
+        <button onclick='redirecionar("Usuario")'><img src='./Imagens/usuario.png'></button>
+    </div>
+    <div class='Corpo'>
+        <h1>Relatório</h1>
+        <div class='Relatorio'>
+            <h2>Escolha a data para o seu relatório:</h2>
+            <input id="dataEscolhida" type="date" onfocusout="dataValida()"><br>
+            <button onclick='gerarRelatorio()'>Gerar relatório</button>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    function redirecionar(Pagina){
+        window.location.href=`./${Pagina}.html`;
+    }
+    var diaHoje;
+    function pegandoData(){
+        var dia = new Date();
+        if(dia.getMonth()<=9){
+            var Mes = '0'+(dia.getMonth()+1);
+        }
+        else{
+            var Mes = dia.getMonth()+1;
+        }
+        diaHoje=dia.getFullYear()+'-'+ Mes +'-'+(dia.getDate()-1);
+        dataEscolhida.value=diaHoje;
+    }
+    function dataValida(){
+        if(dataEscolhida.value<'2021-08-18' || dataEscolhida.value>=diaHoje){
+            alert('Não existe dados nesse dia!');
+        }
+    }
+    function gerarRelatorio(){
+        localStorage.setItem('Dia', dataEscolhida.value);
+        localStorage.setItem('Cidade', 'São paulo');
+        window.location.href='./Dashboard.html';
+    }
+</script>

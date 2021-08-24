@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuario</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+<body>
+    <div class='menuLateral'>
+        <img src='./Imagens/LogoPreto.png'>
+        <button onclick='redirecionar("dashboardTIGeral")' style='margin-top: 50vh;'><img src='./Imagens/graficoGeral.png'></button>
+        <button onclick='redirecionar("relatorioTI")'><img src='./Imagens/relatorioEscolhido.png'></button>
+        <button id='botaoEscolhido'><img src='./Imagens/usuario.png'></button>
+    </div>
+    <div class="Perfil">
+        <h2>Perfil</h2>
+        <div class="mudarDadosConta">
+            <div class="inputDados">
+                <h4>Email:</h4>
+                <input type='text' id='inputEmail' value="juan.silva@bandtec.com.br" disabled>
+                <button onclick="editar('inputEmail')"><img src="./Imagens/alterarDados.png"></button>
+            </div>
+            <div class="inputDados">
+                <h4>Senha:</h4>
+                <input type='password' id='inputSenha' value='senhaPadrao01' disabled>
+                <button onclick="editar('inputSenha')"><img src="./Imagens/alterarDados.png"></button>
+            </div>
+            <div class="inputDados">
+                <h4>Telefone:</h4> 
+                <input style="margin-left: 1.5vh;" id='inputTelefone' type='text' value='(11)4002-8922' disabled>
+                <button onclick="editar('inputTelefone')"><img src="./Imagens/alterarDados.png"></button>
+            </div>
+            <div class="inputDados">
+                <h4>Cargo:</h4>
+                <input id='inputCargo' type='text' value='TI' disabled>
+                <button onclick="editar('inputCargo')"><img src="./Imagens/alterarDados.png"></button>
+            </div><br>
+            <div id='alterarDados' style="display: none;">
+                <button>Alterar Dados</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    function redirecionar(Pagina){
+        window.location.href=`./${Pagina}.html`;
+    }
+
+    function editar(Campo){
+        if(Campo=='inputCargo' && inputCargo.value=='TI'){
+            alert('Você não tem autorização para alterar isso');
+        }
+        else{
+            if(document.getElementById(Campo).disabled){
+                document.getElementById(Campo).disabled=false;
+                ativarBotao();
+            }
+
+            else{
+                document.getElementById(Campo).disabled=true;
+                ativarBotao();
+            }
+        }
+    }
+
+    function ativarBotao(){
+        if(!(inputCargo.disabled) || !(inputTelefone.disabled) || !(inputSenha.disabled) || !(inputEmail.disabled)){
+            alterarDados.style.display='flex';
+        }
+        else{
+            alterarDados.style.display='none';
+        }
+    }
+</script>
+
+<style>
+    #alterarDados button{
+        width: 15vh;
+        height: 5vh;
+        border: none;
+        background-color: #a6a6a6;
+    }
+</style>

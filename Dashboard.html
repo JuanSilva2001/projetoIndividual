@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site - dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+<body onload="carregarGrafico()">
+    <div class='menuLateral'>
+        <img src='./Imagens/LogoPreto.png'>
+        <button onclick='redirecionar("dashboardTIGeral")' style='margin-top: 50vh;'><img src='./Imagens/graficoGeral.png'></button>
+        <button id='botaoEscolhido'><img src='./Imagens/relatorioEscolhido.png'></button>
+        <button onclick='redirecionar("Usuario")'><img src='./Imagens/usuario.png'></button>
+    </div>
+    <div class="Dashboard">
+        <h1 id='diaCidade'>Relatório (</h1>
+        <div class="Grafico">
+            <div class="graph">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div> 
+        <div class="graficoDisco">
+            <div class="graph">
+                <canvas id="myChartDisco"></canvas>
+            </div>
+        </div>
+        <div class='Informacao'>
+            <table>
+                <tr><th></th><th>CPU</th><th>RAM</th></tr>
+                <tr class="Hover"><td>Maior Pico</td><td id='maiorPicoCPU'></td><td id='maiorPicoRAM'></td></tr>
+                <tr class="Hover"><td>Horario Pico</td><td id='horarioPicoCPU'></td><td id='horarioPicoRAM'></td></tr>
+                <tr class="Hover"><td>Mediana</td><td id='medianaCPUId'></td><td id='medianaRAMId'></td></tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    var contagemProblema=0;
+    var arrayNumeroCPU = numerosAleatorios();
+    var arrayNumeroRAM = numerosAleatorios();
+    var arrayCorCPU = cores(arrayNumeroCPU);
+    var arrayCorRAM = cores(arrayNumeroRAM);
+    function carregarGrafico(){
+        informacoes();
+        const label = [
+        '00:00',
+        '01:00',
+        '02:00',
+        '03:00',
+        '04:00',
+        '05:00',
+        '06:00',
+        '07:00',
+        '08:00',
+        '09:00',
+        '10:00',
+        '11:00',
+        '12:00',
+        '13:00',
+        '14:00',
+        '15:00',
+        '16:00',
+        '17:00',
+        '18:00',
+        '19:00',
+        '20:00',
+        '21:00',
+        '22:00',
+        '23:00'
+        ];
+        const data = {
+            labels: label,
+            datasets: [{
+                backgroundColor: [arrayCorCPU[0],arrayCorCPU[1],arrayCorCPU[2],arrayCorCPU[3],
+                       arrayCorCPU[4],arrayCorCPU[5],arrayCorCPU[6],arrayCorCPU[7],
+                       arrayCorCPU[8],arrayCorCPU[9],arrayCorCPU[10],arrayCorCPU[11],
+                       arrayCorCPU[12],arrayCorCPU[13],arrayCorCPU[14],arrayCorCPU[15],
+                       arrayCorCPU[16],arrayCorCPU[17],arrayCorCPU[18],arrayCorCPU[19],
+                       arrayCorCPU[20],arrayCorCPU[21],arrayCorCPU[22],arrayCorCPU[23]],
+                borderColor: '#0d0d0d',
+                data: [arrayNumeroCPU[0], arrayNumeroCPU[1],arrayNumeroCPU[2],arrayNumeroCPU[3],
+                       arrayNumeroCPU[4],arrayNumeroCPU[5],arrayNumeroCPU[6],arrayNumeroCPU[7],
+                       arrayNumeroCPU[8],arrayNumeroCPU[9],arrayNumeroCPU[10],arrayNumeroCPU[11],
+                       arrayNumeroCPU[12],arrayNumeroCPU[13],arrayNumeroCPU[14],arrayNumeroCPU[15],
+                       arrayNumeroCPU[16],arrayNumeroCPU[17],arrayNumeroCPU[18],arrayNumeroCPU[19],
+                       arrayNumeroCPU[20],arrayNumeroCPU[21],arrayNumeroCPU[22],arrayNumeroCPU[23],100]
+            },
+            {
+                backgroundColor: [arrayCorRAM[0],arrayCorRAM[1],arrayCorRAM[2],arrayCorRAM[3],
+                       arrayCorRAM[4],arrayCorRAM[5],arrayCorRAM[6],arrayCorRAM[7],
+                       arrayCorRAM[8],arrayCorRAM[9],arrayCorRAM[10],arrayCorRAM[11],
+                       arrayCorRAM[12],arrayCorRAM[13],arrayCorRAM[14],arrayCorRAM[15],
+                       arrayCorRAM[16],arrayCorRAM[17],arrayCorRAM[18],arrayCorRAM[19],
+                       arrayCorRAM[20],arrayCorRAM[21],arrayCorRAM[22],arrayCorRAM[23]],
+                borderColor: '#0d0d0d',
+                data: [arrayNumeroRAM[0], arrayNumeroRAM[1],arrayNumeroRAM[2],arrayNumeroRAM[3],
+                       arrayNumeroRAM[4],arrayNumeroRAM[5],arrayNumeroRAM[6],arrayNumeroRAM[7],
+                       arrayNumeroRAM[8],arrayNumeroRAM[9],arrayNumeroRAM[10],arrayNumeroRAM[11],
+                       arrayNumeroRAM[12],arrayNumeroRAM[13],arrayNumeroRAM[14],arrayNumeroRAM[15],
+                       arrayNumeroRAM[16],arrayNumeroRAM[17],arrayNumeroRAM[18],arrayNumeroRAM[19],
+                       arrayNumeroRAM[20],arrayNumeroRAM[21],arrayNumeroRAM[22],arrayNumeroRAM[23],100]
+            }
+        ]
+        };
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: false
+                    }
+                }
+            }
+        };
+        var myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+        var numeroDisco = numerosAleatorios()[0];
+        const labelDisco=['Em uso','Vazio'];
+        const dataDisco = {
+            labels: labelDisco,
+            datasets: [{
+                backgroundColor: ['#227fa4','#a6a6a6'],
+                borderColor: '#0d0d0d',
+                data: [numeroDisco,(100-numeroDisco)]
+            }
+        ]
+        };
+        const configDisco = {
+            type: 'doughnut',
+            data: dataDisco,
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: true,
+                        text: 'Disco (GB) em %',
+                        color: '#0d0d0d'
+                    }
+                }
+            }
+        };
+        var myChartDisco = new Chart(
+            document.getElementById('myChartDisco'),
+            configDisco
+        );
+    }
+    function numerosAleatorios(){
+        var horas;
+        var numeros = [];
+        var dia = new Date();
+        if(dia.getMonth()<=9){
+            var Mes = '0'+(dia.getMonth()+1);
+        }
+        else{
+            var Mes = dia.getMonth()+1;
+        }
+        console.log(dia.getFullYear()+'-'+ Mes +'-'+dia.getDate());
+        console.log(localStorage.getItem('Dia'));
+        if(localStorage.getItem('Dia')<dia.getFullYear()+'-'+ Mes +'-'+dia.getDate()){
+            horas=24;
+        }
+        else{
+            horas=dia.getHours();
+        }
+        for(var i=0; i<horas; i++){
+            numeros.push((Math.random()*100).toFixed(2))
+        }
+        return numeros;
+    }
+    function cores(arrayNumero){
+        var cor = [];
+        for(var i = 0; i<24; i++){
+            if(arrayNumero[i]>75){
+                cor.push('Red');
+            }
+            else if(arrayNumero[i]>45){
+                cor.push('yellow');
+            }
+            else{
+                cor.push('green');
+            }
+        }
+        return cor;
+    }
+    function informacoes(){
+        var maioresPicos=[0,0];
+        var horariosPicos=[0,0];
+        var menoresPicos=[101,101];
+        for(var i = 0; i<24; i++){
+            if(arrayNumeroCPU[i]>maioresPicos[0]){
+                maioresPicos[0]=arrayNumeroCPU[i];
+                horariosPicos[0]=i;
+            }
+            else if(arrayNumeroCPU[i]<menoresPicos[0]){
+                menoresPicos[0]=arrayNumeroCPU[i];
+            }
+            
+            if(arrayNumeroRAM[i]>maioresPicos[1]){
+                maioresPicos[1]=arrayNumeroRAM[i];
+                horariosPicos[1]=i;
+            }
+            else if(arrayNumeroRAM[i]<menoresPicos[1]){
+                menoresPicos[1]=arrayNumeroRAM[i];
+            }
+        }
+        medianaCPU = (Number(maioresPicos[0])+Number(menoresPicos[0]))/2;
+        medianaRAM = (Number(maioresPicos[1])+Number(menoresPicos[1]))/2;
+        maiorPicoCPU.innerHTML+= maioresPicos[0]+'%';
+        maiorPicoRAM.innerHTML+= maioresPicos[1]+'%';
+        horarioPicoCPU.innerHTML+= horariosPicos[0]+' Horas';
+        horarioPicoRAM.innerHTML+= horariosPicos[1]+' Horas';
+        medianaCPUId.innerHTML+= medianaCPU.toFixed(2)+'%';
+        medianaRAMId.innerHTML+= medianaRAM.toFixed(2)+'%';
+        diaCidade.innerHTML+=`Data ${conversaoDia()} - ${localStorage.getItem('Cidade')})`;
+    }
+    function conversaoDia(){
+        var dia = new Date(localStorage.getItem('Dia'));
+        if(dia.getMonth()<=9){
+            var Mes = '0'+(dia.getMonth()+1);
+        }
+        else{
+            var Mes = dia.getMonth()+1;
+        }
+        if(dia.getDate()<=9){
+            var dataEscolhido = '0'+(dia.getDate()+1);
+        }
+        else{
+            var dataEscolhido = dia.getDate()+1;
+        }
+        console.log(dia);
+        console.log(dia.getDate());
+        return ' '+dataEscolhido+"/"+Mes+"/"+dia.getFullYear();
+    }
+
+    function redirecionar(Pagina){
+        window.location.href=`./${Pagina}.html`;
+    }
+</script>
+<style>
+    .Dashboard{
+        float: left;
+        width: 100%;
+    }
+
+    .Dashboard h1{
+        margin-left: 10%;
+    }
+
+    .Grafico {
+        width: 80%;
+        background-color: white;
+        color: #f0f0f0;
+        margin-left: 12%;
+        margin-top: 2vh;
+    }
+    
+    .graph{
+        height: 40vh;
+    }
+
+    .graficoDisco {
+        background-color: white;
+        color: #0d0d0d;
+        width: 27.5%;
+        text-align: center;
+        margin-left: 12%;
+        height: 42vh;
+        float: left;
+        margin-right: 5vh;
+        margin-top: 5vh;
+    }
+    .Informacao {
+        background-color: white;
+        color: #0d0d0d;
+        width: 50%;
+        text-align: center;
+        float: left;
+        height: 42vh;
+        margin-top: 5vh;
+    }
+
+    .Informacao table{
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+        font-size: 20px;
+    }
+
+    .Hover:hover{
+        background-color: #f0f0f0;
+    }
+
+    body{
+        font-family: 'Roboto Slab',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",serif;
+    }
+</style>

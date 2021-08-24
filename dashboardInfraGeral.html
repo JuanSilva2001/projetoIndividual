@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+<body onload="gerarGraficos()">
+    <div class='menuLateral'>
+        <img src='./Imagens/LogoPreto.png'>
+        <button style='margin-top: 50vh;' id='botaoEscolhido'><img src='./Imagens/graficoGeral.png'></button>
+        <button onclick='redirecionar("relatorioTI")'><img src='./Imagens/relatorioEscolhido.png'></button>
+        <button onclick='redirecionar("Usuario")'><img src='./Imagens/usuario.png'></button>
+    </div>
+    <div class='selectionServidores'>
+        <h4>Servidores</h4>
+        <select id='selectServidores'>
+            <option value=""></option>
+            <option value="São Paulo">São Paulo</option>
+            <option value="São Caetano">São Caetano</option>
+            <option value="Santo André">Santo André</option>
+            <option value="São Bernardo">São Bernardo</option>
+            <option value="Guarulhos">Guarulhos</option>
+        </select>
+    </div>
+    <div class="Graficos">
+        <div class='graficoCPU'>
+            <h2>CPU</h2>
+            <div class="graph">
+                <canvas id="chartCPU"></canvas>
+            </div>
+        </div>
+        <div class='graficoRAM'>
+            <h2>RAM</h2>
+            <div class="graph">
+                <canvas id="chartRAM"></canvas>
+            </div>
+        </div>
+        <div class='graficoDisco'>
+            <h2>Disco</h2>
+            <div class="graph">
+                <canvas id="chartDisco"></canvas>
+            </div>
+        </div>
+        <div class='graficoGPU'>
+            <h2>GPU</h2>
+            <div class="graph">
+                <canvas id="chartGPU"></canvas>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    const label = ['10s','9s','8s','7s','6s','5s','4s','3s','2s','1s'];
+    var arrayNumeroCPU = dadosAleatorios();
+    var arrayNumeroRAM = dadosAleatorios();
+    var arrayNumeroDisco = dadosAleatorios();
+    var arrayNumeroGPU = dadosAleatorios();
+
+    function redirecionar(Pagina){
+        window.location.href=`./${Pagina}.html`;
+    }
+
+    function dadosAleatorios(){
+        var numeros = [];
+        for(var i=0; i<10; i++){
+            numeros.push((Math.random()*100).toFixed(2))
+        }
+        return numeros;
+    }
+
+    function gerarGraficos(){
+        const dataCPU = {
+            labels: label,
+            datasets: [{
+                borderColor: '#0d0d0d',
+                data: [arrayNumeroCPU[0], arrayNumeroCPU[1], arrayNumeroCPU[2], arrayNumeroCPU[3],
+                       arrayNumeroCPU[4], arrayNumeroCPU[5], arrayNumeroCPU[6], arrayNumeroCPU[7],
+                       arrayNumeroCPU[8], arrayNumeroCPU[9]]
+            }
+        ]
+        };
+        const configCPU = {
+            type: 'line',
+            data: dataCPU,
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: false,
+                    }
+                }
+            }
+        };
+        var myChartCPU = new Chart(
+            document.getElementById('chartCPU'),
+            configCPU
+        );
+
+        const dataRAM = {
+            labels: label,
+            datasets: [{
+                borderColor: '#0d0d0d',
+                data: [arrayNumeroRAM[0], arrayNumeroRAM[1], arrayNumeroRAM[2], arrayNumeroRAM[3],
+                       arrayNumeroRAM[4], arrayNumeroRAM[5], arrayNumeroRAM[6], arrayNumeroRAM[7],
+                       arrayNumeroRAM[8], arrayNumeroRAM[9]]
+            }
+        ]
+        };
+        const configRAM = {
+            type: 'line',
+            data: dataRAM,
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: false,
+                    }
+                }
+            }
+        };
+        var myChartRAM = new Chart(
+            document.getElementById('chartRAM'),
+            configRAM
+        );
+
+        const dataDisco = {
+            labels: label,
+            datasets: [{
+                borderColor: '#0d0d0d',
+                data: [arrayNumeroDisco[0], arrayNumeroDisco[1], arrayNumeroDisco[2], arrayNumeroDisco[3],
+                       arrayNumeroDisco[4], arrayNumeroDisco[5], arrayNumeroDisco[6], arrayNumeroDisco[7],
+                       arrayNumeroDisco[8], arrayNumeroDisco[9]]
+            }
+        ]
+        };
+        const configDisco = {
+            type: 'line',
+            data: dataDisco,
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: false,
+                    }
+                }
+            }
+        };
+        var myChartDisco = new Chart(
+            document.getElementById('chartDisco'),
+            configDisco
+        );
+
+        const dataGPU = {
+            labels: label,
+            datasets: [{
+                borderColor: '#0d0d0d',
+                data: [arrayNumeroGPU[0], arrayNumeroGPU[1], arrayNumeroGPU[2], arrayNumeroGPU[3],
+                       arrayNumeroGPU[4], arrayNumeroGPU[5], arrayNumeroGPU[6], arrayNumeroGPU[7],
+                       arrayNumeroGPU[8], arrayNumeroGPU[9]]
+            }
+        ]
+        };
+        const configGPU = {
+            type: 'line',
+            data: dataGPU,
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: false,
+                    }
+                }
+            }
+        };
+        var myChartGPU = new Chart(
+            document.getElementById('chartGPU'),
+            configGPU
+        );
+    }
+</script>
+
+<style>
+    .Graficos h2{
+        margin-top: 3vh;
+    }
+
+    .selectionServidores{
+    width: 20%;
+    height: 5.8vh;
+    background-color: #a6a6a6;
+    border-radius: 5vh;
+    margin-top: 2vh;
+    float: left;
+    margin-left: 42%;
+}
+
+.selectionServidores h4{
+    float: left;
+    width: 40%;
+    margin-top: 1.5vh;
+    margin-left: 1.5vh;
+}
+
+.selectionServidores select{
+    float: left;
+    width: 50%;
+    height: 5.8vh;
+    border: none;
+    background-color: transparent;
+    margin-top: 0.5vh;
+}
+
+    #selectServidores{
+        -webkit-appearance: none;
+        border:none;
+        background-color: #a6a6a6;
+        height: 5vh;
+        font-weight: bolder;
+    }
+</style>
